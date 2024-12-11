@@ -17,7 +17,33 @@ class Ex1Test {
         assertFalse(Ex1.isValidFormat("10b17"), "10b17 should be invalid (base > 16)");
         assertFalse(Ex1.isValidFormat(""), "Empty string should be invalid");
     }
+    // Test for valid characters in base 2
+    @Test
+    void testIsValidCharForBaseBase2() {
+        assertTrue(Ex1.isValidCharForBase('0', 2), "0 should be valid in base 2");
+        assertTrue(Ex1.isValidCharForBase('1', 2), "1 should be valid in base 2");
+        assertFalse(Ex1.isValidCharForBase('2', 2), "2 should be invalid in base 2");
+        assertFalse(Ex1.isValidCharForBase('A', 2), "A should be invalid in base 2");
+    }
 
+    // Test for valid characters in base 10
+    @Test
+    void testIsValidCharForBaseBase10() {
+        assertTrue(Ex1.isValidCharForBase('0', 10), "0 should be valid in base 10");
+        assertTrue(Ex1.isValidCharForBase('5', 10), "5 should be valid in base 10");
+        assertFalse(Ex1.isValidCharForBase('A', 10), "A should be invalid in base 10");
+        assertFalse(Ex1.isValidCharForBase('G', 10), "G should be invalid in base 10");
+    }
+
+    // Test for valid characters in base 16
+    @Test
+    void testIsValidCharForBaseBase16() {
+        assertTrue(Ex1.isValidCharForBase('0', 16), "0 should be valid in base 16");
+        assertTrue(Ex1.isValidCharForBase('A', 16), "A should be valid in base 16");
+        assertTrue(Ex1.isValidCharForBase('F', 16), "F should be valid in base 16");
+        assertFalse(Ex1.isValidCharForBase('G', 16), "G should be invalid in base 16");
+        assertFalse(Ex1.isValidCharForBase('Z', 16), "Z should be invalid in base 16");
+    }
     @Test
     void testConvertToDecimal() {
         // Valid conversions

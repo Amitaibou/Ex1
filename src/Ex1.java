@@ -49,7 +49,7 @@ public class Ex1 {
     }
 
     // Function to check if a character is valid in a given base
-    private static boolean isValidCharForBase(char c, int base) {
+    static boolean isValidCharForBase(char c, int base) {
         if (Character.isDigit(c)) {
             return c - '0' < base; // Digits must be less than the base
         } else if (Character.isLetter(c)) {
