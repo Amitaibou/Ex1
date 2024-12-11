@@ -6,16 +6,16 @@ class Ex1Test {
     @Test
     void testIsValidFormat() {
         // Valid cases
-        assertTrue(Ex1.isValidFormat("1b2"), "1b2 should be valid");
-        assertTrue(Ex1.isValidFormat("AAb11"), "AAb11 should be valid");
-        assertTrue(Ex1.isValidFormat("0b10"), "0b10 should be valid");
-        assertTrue(Ex1.isValidFormat("FFb16"), "FFb16 should be valid");
+        assertTrue(Ex1.isNumber("1b2"), "1b2 should be valid");
+        assertTrue(Ex1.isNumber("AAb11"), "AAb11 should be valid");
+        assertTrue(Ex1.isNumber("0b10"), "0b10 should be valid");
+        assertTrue(Ex1.isNumber("FFb16"), "FFb16 should be valid");
 
         // Invalid cases
-        assertFalse(Ex1.isValidFormat("1b"), "1b should be invalid (missing base)");
-        assertFalse(Ex1.isValidFormat("GbG"), "GbG should be invalid (base is not numeric or valid letter)");
-        assertFalse(Ex1.isValidFormat("10b17"), "10b17 should be invalid (base > 16)");
-        assertFalse(Ex1.isValidFormat(""), "Empty string should be invalid");
+        assertFalse(Ex1.isNumber("1b"), "1b should be invalid (missing base)");
+        assertFalse(Ex1.isNumber("GbG"), "GbG should be invalid (base is not numeric or valid letter)");
+        assertFalse(Ex1.isNumber("10b17"), "10b17 should be invalid (base > 16)");
+        assertFalse(Ex1.isNumber(""), "Empty string should be invalid");
     }
     // Test for valid characters in base 2
     @Test
@@ -59,13 +59,13 @@ class Ex1Test {
     @Test
     void testConvertFromDecimal() {
         // Valid conversions
-        assertEquals("1", Ex1.convertFromDecimal(1, 2), "1 in decimal to base 2 should be 1");
-        assertEquals("A", Ex1.convertFromDecimal(10, 11), "10 in decimal to base 11 should be A");
-        assertEquals("FF", Ex1.convertFromDecimal(255, 16), "255 in decimal to base 16 should be FF");
-        assertEquals("AA", Ex1.convertFromDecimal(120, 11), "120 in decimal to base 11 should be AA");
+        assertEquals("1", Ex1.int2Number(1, 2), "1 in decimal to base 2 should be 1");
+        assertEquals("A", Ex1.int2Number(10, 11), "10 in decimal to base 11 should be A");
+        assertEquals("FF", Ex1.int2Number(255, 16), "255 in decimal to base 16 should be FF");
+        assertEquals("AA", Ex1.int2Number(120, 11), "120 in decimal to base 11 should be AA");
 
         // Edge cases
-        assertEquals("0", Ex1.convertFromDecimal(0, 10), "0 in decimal to any base should be 0");
+        assertEquals("0", Ex1.int2Number(0, 10), "0 in decimal to any base should be 0");
     }
 
     @Test
@@ -79,5 +79,28 @@ class Ex1Test {
         Ex1.processNumbers("1b", "10b11", 10);
         Ex1.processNumbers("AAb17", "10b11", 10);
         Ex1.processNumbers("AAb11", "GbG", 10);
+    }
+    @Test
+    void maxIndexTest() {
+        // Test where the max value is at index 2
+        assertEquals(2, Ex1.maxIndex(new String[]{"AAb11", "10b11", "FFb16", "1b16"}), "The index of the max value should be 2");
+
+        // Test when the max value is at the beginning of the array (index 0)
+        assertEquals(0, Ex1.maxIndex(new String[]{"FFb16", "1b16", "AAb11", "10b11"}), "The index of the max value should be 0");
+
+        // Test when the max value is at the end of the array (index 3)
+        assertEquals(3, Ex1.maxIndex(new String[]{"10b11", "AAb11", "1b16", "FFb16"}), "The index of the max value should be 3");
+
+        // Test with all values being equal (should return the first index)
+        assertEquals(0, Ex1.maxIndex(new String[]{"1b2", "1b2", "1b2", "1b2"}), "The index of the max value should be 0");
+
+        /* Ex1.maxIndex(new String[]{"AAb11", "10b11","FFb16", "1b16"});
+        Ex1.maxIndex(new String[]{"FFb16", "1b16"});
+        Ex1.maxIndex(new String[]{"1b2", "0b2"});
+
+        // Invalid inputs
+        Ex1.maxIndex(new String[]{"1b", "10b11","1b2", "0b2"});
+        Ex1.maxIndex(new String[]{"AAb17", "10b11"});
+        Ex1.maxIndex(new String[]{"AAb11", "GbG"});*/
     }
 }

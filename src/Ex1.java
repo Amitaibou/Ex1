@@ -1,7 +1,7 @@
 public class Ex1 {
 
     // Function to check if the string follows the valid format <number>b<base>
-    public static boolean isValidFormat(String input) {
+    public static boolean isNumber(String input) {
         if (input == null || input.isEmpty()) {
             return false; // Input must not be null or empty
         }
@@ -74,7 +74,7 @@ public class Ex1 {
     }
 
     // Function to convert a decimal number to any base (2-16)
-    public static String convertFromDecimal(int number, int base) {
+    public static String int2Number(int number, int base) {
         if (number == 0) {
             return "0";
         }
@@ -95,13 +95,13 @@ public class Ex1 {
     // Process the input numbers and perform calculations
     public static void processNumbers(String num1, String num2, int outputBase) {
         // Validate the numbers
-        if (!isValidFormat(num1)) {
+        if (!isNumber(num1)) {
             System.out.println("num1 = " + num1 + " is number: false , value: -1");
             System.out.println("ERR: num1 is in the wrong format! (" + num1 + ")");
             return;
         }
 
-        if (!isValidFormat(num2)) {
+        if (!isNumber(num2)) {
             System.out.println("num2 = " + num2 + " is number: false , value: -1");
             System.out.println("ERR: num2 is in the wrong format! (" + num2 + ")");
             return;
@@ -127,8 +127,8 @@ public class Ex1 {
         int product = value1 * value2;
 
         // Convert results to the output base
-        String sumStr = convertFromDecimal(sum, outputBase);
-        String productStr = convertFromDecimal(product, outputBase);
+        String sumStr = int2Number(sum, outputBase);
+        String productStr = int2Number(product, outputBase);
 
         // Output results in the specified format
         System.out.println(num1 + " + " + num2 + " = " + sumStr + "b" + outputBase);
@@ -136,8 +136,27 @@ public class Ex1 {
 
         // Find the maximum value among the results
         int maxValue = Math.max(Math.max(value1, value2), Math.max(sum, product));
-        String maxNumber = convertFromDecimal(maxValue, outputBase);
+        String maxNumber = int2Number(maxValue, outputBase);
         System.out.println("Max number over [" + num1 + ", " + num2 + ", " + sumStr + "b" + outputBase + ", " + productStr + "b" + outputBase + "] is: " + maxNumber + "b" + outputBase);
     }
+
+    public static int maxIndex(String[] arr) {
+        int ans = 0;
+        int index =0;
+        int base1 , num;
+        for (int i = 0; i < arr.length; i++) {
+            String[] num1Parts = arr[i].split("b");
+            base1 = (num1Parts.length == 2) ? parseBase(num1Parts[1]) : 10;
+            num = convertToDecimal(num1Parts[0], base1);
+            if(ans < num) {
+                ans = num;
+                index = i;
+            }
+        }
+        System.out.println("the max is: " + ans + " and is index is: " + index);
+        return index;
+    }
+
+
 
 }

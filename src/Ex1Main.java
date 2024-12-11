@@ -19,7 +19,7 @@ public class Ex1Main {
             }
 
             // Validate and process the first number
-            if (!Ex1.isValidFormat(num1)) {
+            if (!Ex1.isNumber(num1)) {
                 System.out.println("num1 = " + num1 + " is number: false , value: -1");
                 System.out.println("ERR: num1 is in the wrong format! (" + num1 + ")");
                 continue; // Ask for the first number again
@@ -43,7 +43,7 @@ public class Ex1Main {
             }
 
             // Validate and process the second number
-            if (!Ex1.isValidFormat(num2)) {
+            if (!Ex1.isNumber(num2)) {
                 System.out.println("num2 = " + num2 + " is number: false , value: -1");
                 System.out.println("ERR: num2 is in the wrong format! (" + num2 + ")");
                 continue; // Ask for the second number again
