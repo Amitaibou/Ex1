@@ -20,30 +20,30 @@ The program accepts strings in the format `<number><b><base>`, such as `135bA`, 
 
 Features:
 
-Input Parsing: Validates and parses numbers in the format <number><b><base> where the base can range from 2 to 16.
-Conversions: Converts numbers between bases and calculates their decimal values.
-Operations: Performs addition, multiplication, and finds the maximum value among given inputs.
-Edge Case Handling: Rejects invalid inputs like GbG, 123b, or 1234b11 and prints appropriate error messages.
-Interactive Program: Allows users to interactively input numbers, choose a base, and see results.
+input Parsing: validates and parses numbers in the format <number><b><base> where the base can range from 2 to 16.
+conversions: converts numbers between bases and calculates their decimal values.
+operations: performs addition, multiplication, and finds the maximum value among given inputs.
+edge Case handling: rejects invalid inputs like GbG, 123b, or 1234b11 and prints appropriate error messages.
+interactive program: allows users to interactively input numbers, choose a base, and see results.
 
 Testing:
 
-Testing was done using the Ex1Test.java class with JUnit.
+testing was done using the Ex1Test.java class with JUnit.
 
-The following aspects were tested:
+the following aspects were tested:
 
-Valid inputs in various bases ( 1b2, AAb11, FFb16).
-Invalid inputs ( 1b, GbG, 10b17).
-Edge cases like 0, single-character inputs, and large numbers.
+valid inputs in various bases ( 1b2, AAb11, FFb16).
+invalid inputs ( 1b, GbG, 10b17).
+edge cases like 0, single-character inputs, and large numbers.
 
-Example of a passing test case:
+example of a passing test case:
 
 assertTrue(Ex1.isValidFormat("AAb11"), "AAb11 should be valid");
 assertEquals(120, Ex1.convertToDecimal("AA", 11), "AA in base 11 should be 120 in decimal");
 
 Examples:
 
-Here are some examples of how the program works:
+here are some examples of how the program works:
 
 Example 1 :
 
@@ -92,18 +92,19 @@ Max number over [1DbG, AAbB, 10010101b2, 110110011000b2] is: 110110011000b2
 
 Notes :
 
-The repository includes the following files:
-Ex1.java: Core implementation of the functionality.
-Ex1Test.java: JUnit tests to validate the implementation.
-Ex1Main.java: Interactive program to demonstrate functionality.
+the repository includes the following files:
+Ex1.java: all the functions  that makes everything work.
+Ex1Test.java: tests to check if the code works correctly.
+Ex1Main.java: program that lets you interact with the code.
+
 
 Challenges Faced:
 
-Handling Invalid Inputs: Ensuring the program gracefully handles edge cases like GbG, 1b, or missing bases was challenging but resolved with proper validation logic.
-Base Conversions: Converting between different bases required careful handling of characters like A-F and ensuring no overflow occurs.
-Testing: Writing thorough test cases for edge cases was time-consuming but essential for ensuring program correctness.
+handling invalid inputs: It was hard to make sure the program could handle unusual cases like "GbG", "1b", or missing bases, but I fixed it with proper checks.
+base conversions: converting between different number bases was tricky, especially when dealing with letters like A-F, and I had to make sure the numbers didn't overflow.
+testing: writing enough tests for special cases took time but was important to make sure the program worked correctly.
 
 Conclusion:
 
-This project helped me understand the fundamentals of function programming and testing. It was a great opportunity to apply what I learned in class to a real-world problem. If there are any questions about my implementation, feel free to reach out.
-
+this project helped me learn the basics of functional programming and testing.
+also helped me to understand better how to use github and intellj.

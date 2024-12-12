@@ -1,54 +1,54 @@
 public class Ex1 {
 
-    // Function to check if the string follows the valid format <number>b<base>
+    // function to check if the string follows the valid format <number>b<base>
     public static boolean isNumber(String input) {
         if (input == null || input.isEmpty()) {
-            return false; // Input must not be null or empty
+            return false; // input must not be null or empty
         }
 
         if (input.contains("b")) {
             String[] parts = input.split("b");
             if (parts.length != 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
-                return false; // Must have both number and base
+                return false; // must have both number and base
             }
 
-            String numberPart = parts[0]; // e.g., "AAbB"
-            String basePart = parts[1];   // e.g., "11" or "B"
+            String numberPart = parts[0]; // "AAbB"
+            String basePart = parts[1];   // "11" or "B"
 
             try {
-                // Convert the base part to an integer, handling letters like "A" for 10, "B" for 11, ..., "G" for 16
+                // convert the base part to an integer,for letters like "A" for 10, "B" for 11, ..., "G" for 16
                 int base = parseBase(basePart);
                 if (base < 2 || base > 16) {
-                    return false; // Base must be between 2 and 16
+                    return false; // base must be between 2 and 16
                 }
 
-                // Check if each character in the number part is valid for the given base
+                // check if each character in the number part is valid for the given base
                 for (char c : numberPart.toCharArray()) {
                     if (!isValidCharForBase(c, base)) {
-                        return false; // Invalid character for the given base
+                        return false; // invalid character for the given base
                     }
                 }
                 return true;
             } catch (NumberFormatException e) {
-                return false; // Base part must be a valid number or letter
+                return false; // base part must be a valid number or letter
             }
         } else {
-            // Assume it's in the format where the base is implicit
-            // Check if the number contains only valid decimal characters
+            // assume the base is understood and not directly given
+            // check if the number is only valid decimal characters
             return input.matches("[0-9]+");
         }
     }
 
-    // Function to parse a base part, allowing letters like "A" for 10, "B" for 11, ..., "G" for 16
+    // function to parse a base part, allowing letters like "A" for 10, "B" for 11, ..., "G" for 16
     static int parseBase(String basePart) throws NumberFormatException {
         if (basePart.length() == 1 && Character.isLetter(basePart.charAt(0))) {
-            return basePart.charAt(0) - 'A' + 10; // Convert letters to numbers (A=10, B=11, ..., G=16)
+            return basePart.charAt(0) - 'A' + 10; // convert letters to numbers (A=10, B=11, ..., G=16)
         } else {
-            return Integer.parseInt(basePart); // Parse as a regular number
+            return Integer.parseInt(basePart); // parse as a regular number
         }
     }
 
-    // Function to check if a character is valid in a given base
+    // function to check if a character is valid in a given base
     static boolean isValidCharForBase(char c, int base) {
         if (Character.isDigit(c)) {
             return c - '0' < base; // Digits must be less than the base
@@ -59,7 +59,7 @@ public class Ex1 {
         return false;
     }
 
-    // Function to convert a number from any base (2-16) to decimal (base 10)
+    // function to convert a number from any base (2-16) to decimal (base 10)
     public static int convertToDecimal(String number, int base) {
         int result = 0;
         for (char c : number.toCharArray()) {
@@ -73,7 +73,7 @@ public class Ex1 {
         return result;
     }
 
-    // Function to convert a decimal number to any base (2-16)
+    // function to convert a decimal number to any base (2-16)
     public static String int2Number(int number, int base) {
         if (number == 0) {
             return "0";
@@ -92,9 +92,9 @@ public class Ex1 {
         return sb.reverse().toString();
     }
 
-    // Process the input numbers and perform calculations
+    // process the input numbers and perform calculations
     public static void processNumbers(String num1, String num2, int outputBase) {
-        // Validate the numbers
+        // validate the numbers
         if (!isNumber(num1)) {
             System.out.println("num1 = " + num1 + " is number: false , value: -1");
             System.out.println("ERR: num1 is in the wrong format! (" + num1 + ")");
@@ -107,34 +107,34 @@ public class Ex1 {
             return;
         }
 
-        // Split the inputs into number and base
+        // split the inputs into number and base
         String[] num1Parts = num1.split("b");
         String[] num2Parts = num2.split("b");
 
-        // Handle inputs without a base (assume base 10)
+        // handle inputs without a base (assume base 10)
         int base1 = (num1Parts.length == 2) ? parseBase(num1Parts[1]) : 10;
         int value1 = convertToDecimal(num1Parts[0], base1);
 
         int base2 = (num2Parts.length == 2) ? parseBase(num2Parts[1]) : 10;
         int value2 = convertToDecimal(num2Parts[0], base2);
 
-        // Print validation and decimal value
+        // print validation and decimal value
         System.out.println("num1 = " + num1 + " is number: true , value: " + value1);
         System.out.println("num2 = " + num2 + " is number: true , value: " + value2);
 
-        // Perform calculations
+        // all the  calculations
         int sum = value1 + value2;
         int product = value1 * value2;
 
-        // Convert results to the output base
+        // convert results to the output base
         String sumStr = int2Number(sum, outputBase);
         String productStr = int2Number(product, outputBase);
 
-        // Output results in the specified format
+        // output results format
         System.out.println(num1 + " + " + num2 + " = " + sumStr + "b" + outputBase);
         System.out.println(num1 + " * " + num2 + " = " + productStr + "b" + outputBase);
 
-        // Find the maximum value among the results
+        // find the maximum value of the results
         int maxValue = Math.max(Math.max(value1, value2), Math.max(sum, product));
         String maxNumber = int2Number(maxValue, outputBase);
         System.out.println("Max number over [" + num1 + ", " + num2 + ", " + sumStr + "b" + outputBase + ", " + productStr + "b" + outputBase + "] is: " + maxNumber + "b" + outputBase);
@@ -156,7 +156,5 @@ public class Ex1 {
         System.out.println("the max is: " + ans + " and is index is: " + index);
         return index;
     }
-
-
 
 }
